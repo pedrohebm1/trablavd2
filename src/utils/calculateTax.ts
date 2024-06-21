@@ -3,7 +3,6 @@ export default function calculateTax<Number>(
   state: string,
   receiptValue: number
 ): number {
-    console.log(codTax, state, receiptValue)
   if ((codTax === "1234" || codTax === "6789") && state === "RJ") {
     return (receiptValue * 1) / 100;
   }

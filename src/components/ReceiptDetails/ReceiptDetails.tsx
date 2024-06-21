@@ -32,7 +32,7 @@ export default function ReceiptDetails({
         <View style={styles.Informations}>
           <Text>Nota fiscal: {data.receipt}</Text>
           <Text>Código imposto: {data.codTax}</Text>
-          <Text>Valor nota fiscal: {data.receiptValue}</Text>
+          <Text>Valor nota fiscal: R${data.receiptValue}</Text>
           <Text>Estado: {caseFirstLetter(data.state)}</Text>
           <Text>Fornecedor: {caseFirstLetter(data.supplier.toLowerCase())}</Text>
           <Text>

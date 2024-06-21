@@ -67,7 +67,7 @@ export default function Listagem() {
               }
             </Text>
             <Text style={styles.TextSmall}>
-              Valor Total:
+              Valor Total: R$
               {receipts
                 .filter(
                   (receipt) =>
@@ -91,7 +91,7 @@ export default function Listagem() {
               }
             </Text>
             <Text style={styles.TextSmall}>
-              Valor Total:
+              Valor Total: R$
               {receipts
                 .filter(
                   (receipt) =>
@@ -115,7 +115,7 @@ export default function Listagem() {
               }
             </Text>
             <Text style={styles.TextSmall}>
-              Valor Total:
+              Valor Total: R$
               {receipts
                 .filter(
                   (receipt) =>
@@ -142,7 +142,7 @@ export default function Listagem() {
               }
             </Text>
             <Text style={styles.TextSmall}>
-              Valor Total:
+              Valor Total: R$
               {receipts
                 .filter(
                   (receipt) =>
@@ -166,7 +166,7 @@ export default function Listagem() {
               }
             </Text>
             <Text style={styles.TextSmall}>
-              Valor Total:
+              Valor Total: R$
               {receipts
                 .filter(
                   (receipt) =>
@@ -190,7 +190,7 @@ export default function Listagem() {
               }
             </Text>
             <Text style={styles.TextSmall}>
-              Valor Total:
+              Valor Total: R$
               {receipts
                 .filter(
                   (receipt) =>

@@ -12,24 +12,15 @@ interface Props {
 }
 
 export default function Receipt({ data, setSelectedReceipt }: any) {
-  const [isMenu, setMenu] = useState(false);
-
   function caseFirstLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
-
-  function openMenu(data: Props) {
-    Alert.alert(
-      `Detalhes da NF\n${data.id}`,
-      `Fornecedor: ${data.supplier}\nValor: R$ ${data.receiptValue}\nEstado: ${data.state.toUpperCase()}`
-    );
   }
 
   return (
     <View style={styles.row}>
       <Text style={styles.cell}>{data.id}</Text>
       <Text style={styles.cell}>{caseFirstLetter(data.supplier.toLowerCase())}</Text>
-      <Text style={styles.cell}>{data.receiptValue}</Text>
+      <Text style={styles.cell}>R${parseFloat(data.receiptValue).toFixed(2)}</Text>
       <TouchableOpacity style={styles.button} onPress={() => setSelectedReceipt(data)}>
         <Entypo name="dots-three-horizontal" size={15} color="black" />
       </TouchableOpacity>
