@@ -27,10 +27,16 @@ export default function Cadastro() {
       codTax,
       receiptValue,
       state,
-      supplier,
+      supplier
     };
 
-    await saveReceipt(data);}
+    await saveReceipt(data);
+    setReceipt("");
+    setCodTax("");
+    setReceiptValue("");
+    setState("");
+    setSupplier("");
+  }
   }
 
   return (
@@ -73,7 +79,7 @@ export default function Cadastro() {
           autoCapitalize="none"
           maxLength={40}
           value={supplier}
-          onChangeText={(value) => setSupplier(value)}
+          onChangeText={(value) => setSupplier(value.toLowerCase())}
         ></TextInput>
       </View>
       <TouchableOpacity

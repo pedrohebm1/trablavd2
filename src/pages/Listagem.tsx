@@ -77,7 +77,7 @@ export default function Listagem() {
                 .reduce(
                   (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
                   0
-                )}
+                ).toFixed(2)}
             </Text>
             <Text>Estado SP</Text>
             <Text style={styles.TextSmall}>
@@ -101,7 +101,7 @@ export default function Listagem() {
                 .reduce(
                   (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
                   0
-                )}
+                ).toFixed(2)}
             </Text>
             <Text>Estado MG</Text>
             <Text style={styles.TextSmall}>
@@ -125,7 +125,7 @@ export default function Listagem() {
                 .reduce(
                   (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
                   0
-                )}
+                ).toFixed(2)}
             </Text>
           </View>
           <View style={styles.Informations}>
@@ -152,7 +152,7 @@ export default function Listagem() {
                 .reduce(
                   (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
                   0
-                )}
+                ).toFixed(2)}
             </Text>
             <Text>Estado SP</Text>
             <Text style={styles.TextSmall}>
@@ -176,11 +176,11 @@ export default function Listagem() {
                 .reduce(
                   (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
                   0
-                )}
+                ).toFixed(2)}
             </Text>
             <Text>Estado MG</Text>
             <Text style={styles.TextSmall}>
-              Quantidade Total:{" "}
+              Quantidade Total:
               {
                 receipts.filter(
                   (receipt) =>
@@ -200,7 +200,7 @@ export default function Listagem() {
                 .reduce(
                   (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
                   0
-                )}
+                ).toFixed(2)}
             </Text>
           </View>
         </View>

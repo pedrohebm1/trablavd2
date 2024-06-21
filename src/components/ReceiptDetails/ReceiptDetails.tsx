@@ -20,6 +20,9 @@ export default function ReceiptDetails({
   handleRemoveReceipt,
   handleCloseMenu
 }: Props) {
+  function caseFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <SafeAreaView style={styles.ScreenCover}>
       <View style={styles.BackgroundCover}></View>
@@ -30,7 +33,8 @@ export default function ReceiptDetails({
           <Text>Nota fiscal: {data.receipt}</Text>
           <Text>Código imposto: {data.codTax}</Text>
           <Text>Valor nota fiscal: {data.receiptValue}</Text>
-          <Text>Estado: {data.state}</Text>
+          <Text>Estado: {caseFirstLetter(data.state)}</Text>
+          <Text>Fornecedor: {caseFirstLetter(data.supplier.toLowerCase())}</Text>
           <Text>
             Valor imposto:{" "}
             {calculateTax(
