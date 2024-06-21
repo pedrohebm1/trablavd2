@@ -229,6 +229,7 @@ export default function Listagem() {
           <Receipt data={item} setSelectedReceipt={setSelectedReceipt} />
         )}
       />
+      {showInformation()}
       {selectedReceipt !== null && (
         <ReceiptDetails
           data={selectedReceipt}
@@ -236,7 +237,6 @@ export default function Listagem() {
           handleCloseMenu={handleCloseMenu}
         />
       )}
-      {showInformation()}
     </View>
   );
 }

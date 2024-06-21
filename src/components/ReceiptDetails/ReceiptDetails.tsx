@@ -83,6 +83,7 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: "center",
     borderRadius: 5,
+    zIndex: 30
   },
   Title: {
     fontSize: 30,
