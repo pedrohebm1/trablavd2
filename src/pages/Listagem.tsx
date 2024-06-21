@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import { loadReceipt, removeReceipt } from "../utils/storageUtil";
 import Receipt from "../components/Receipts/Receipts";
 import ReceiptDetails from "../components/ReceiptDetails/ReceiptDetails";
+import { useFocusEffect } from "@react-navigation/native";
 
 type Props = {
   id: string;
@@ -19,6 +20,15 @@ export default function Listagem() {
 
   const handleCloseMenu = () => {
     setSelectedReceipt(null);
+  };
+
+  const fetchData = async () => {
+    try {
+      const data: Props[] = await loadReceipt();
+      setReceipts(data);
+    } catch (error) {
+      console.warn("Error ao carregar as notas fiscais", error);
+    }
   };
 
   function handleRemoveReceipt(id: String) {
@@ -38,22 +48,175 @@ export default function Listagem() {
     ]);
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data: Props[] = await loadReceipt();
-        setReceipts(data);
-      } catch (error) {
-        console.warn("Error ao carregar as notas fiscais", error);
-      }
-    };
+  function showInformation() {
+    return (
+      <View>
+        <Text style={styles.TitleSmall}>Informações</Text>
+        <View style={styles.InformationContainer}>
+          <View style={styles.Informations}>
+            <Text>Fornecedor Totvs</Text>
+            <Text>Estado RJ</Text>
+            <Text style={styles.TextSmall}>
+              Quantidade Total:
+              {
+                receipts.filter(
+                  (receipt) =>
+                    receipt.state === "RJ" &&
+                    receipt.supplier.toLowerCase() === "totvs"
+                ).length
+              }
+            </Text>
+            <Text style={styles.TextSmall}>
+              Valor Total:
+              {receipts
+                .filter(
+                  (receipt) =>
+                    receipt.state === "RJ" &&
+                    receipt.supplier.toLowerCase() === "totvs"
+                )
+                .reduce(
+                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  0
+                )}
+            </Text>
+            <Text>Estado SP</Text>
+            <Text style={styles.TextSmall}>
+              Quantidade Total:
+              {
+                receipts.filter(
+                  (receipt) =>
+                    receipt.state === "SP" &&
+                    receipt.supplier.toLowerCase() === "totvs"
+                ).length
+              }
+            </Text>
+            <Text style={styles.TextSmall}>
+              Valor Total:
+              {receipts
+                .filter(
+                  (receipt) =>
+                    receipt.state === "SP" &&
+                    receipt.supplier.toLowerCase() === "totvs"
+                )
+                .reduce(
+                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  0
+                )}
+            </Text>
+            <Text>Estado MG</Text>
+            <Text style={styles.TextSmall}>
+              Quantidade Total:{" "}
+              {
+                receipts.filter(
+                  (receipt) =>
+                    receipt.state === "MG" &&
+                    receipt.supplier.toLowerCase() === "totvs"
+                ).length
+              }
+            </Text>
+            <Text style={styles.TextSmall}>
+              Valor Total:
+              {receipts
+                .filter(
+                  (receipt) =>
+                    receipt.state === "MG" &&
+                    receipt.supplier.toLowerCase() === "totvs"
+                )
+                .reduce(
+                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  0
+                )}
+            </Text>
+          </View>
+          <View style={styles.Informations}>
+            <Text>Fornecedor Microsoft</Text>
+            <Text>Estado RJ</Text>
+            <Text style={styles.TextSmall}>
+              Quantidade Total:
+              {
+                receipts.filter(
+                  (receipt) =>
+                    receipt.state === "RJ" &&
+                    receipt.supplier.toLowerCase() === "microsoft"
+                ).length
+              }
+            </Text>
+            <Text style={styles.TextSmall}>
+              Valor Total:
+              {receipts
+                .filter(
+                  (receipt) =>
+                    receipt.state === "RJ" &&
+                    receipt.supplier.toLowerCase() === "microsoft"
+                )
+                .reduce(
+                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  0
+                )}
+            </Text>
+            <Text>Estado SP</Text>
+            <Text style={styles.TextSmall}>
+              Quantidade Total:
+              {
+                receipts.filter(
+                  (receipt) =>
+                    receipt.state === "SP" &&
+                    receipt.supplier.toLowerCase() === "microsoft"
+                ).length
+              }
+            </Text>
+            <Text style={styles.TextSmall}>
+              Valor Total:
+              {receipts
+                .filter(
+                  (receipt) =>
+                    receipt.state === "SP" &&
+                    receipt.supplier.toLowerCase() === "microsoft"
+                )
+                .reduce(
+                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  0
+                )}
+            </Text>
+            <Text>Estado MG</Text>
+            <Text style={styles.TextSmall}>
+              Quantidade Total:{" "}
+              {
+                receipts.filter(
+                  (receipt) =>
+                    receipt.state === "MG" &&
+                    receipt.supplier.toLowerCase() === "microsoft"
+                ).length
+              }
+            </Text>
+            <Text style={styles.TextSmall}>
+              Valor Total:
+              {receipts
+                .filter(
+                  (receipt) =>
+                    receipt.state === "MG" &&
+                    receipt.supplier.toLowerCase() === "microsoft"
+                )
+                .reduce(
+                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  0
+                )}
+            </Text>
+          </View>
+        </View>
+      </View>
+    );
+  }
 
-    fetchData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchData();
+    }, [])
+  );
 
   return (
     <View style={styles.ViewContainer}>
-      <Text style={styles.Title}>Receipts</Text>
+      <Text style={styles.Title}>Notas fiscais</Text>
       <View style={styles.Header}>
         <Text style={styles.Heading}>Id</Text>
         <Text style={styles.Heading}>Fornecedor</Text>
@@ -73,16 +236,7 @@ export default function Listagem() {
           handleCloseMenu={handleCloseMenu}
         />
       )}
-      <View>
-        <Text>Total de notas fiscais: {receipts.length}</Text>
-        <Text>
-          Valor total Notas Fiscais:{" "}
-          {receipts.reduce(
-            (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
-            0
-          )}
-        </Text>
-      </View>
+      {showInformation()}
     </View>
   );
 }
@@ -100,6 +254,14 @@ const styles = StyleSheet.create({
     fontSize: 30,
     alignSelf: "center",
   },
+  TitleSmall: {
+    fontSize: 20,
+    alignSelf: "center",
+    padding: 20,
+  },
+  TextSmall: {
+    fontSize: 10,
+  },
   Header: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -107,5 +269,12 @@ const styles = StyleSheet.create({
   },
   Heading: {
     flex: 1,
+  },
+  InformationContainer: {
+    flexDirection: "row",
+  },
+  Informations: {
+    flex: 1,
+    gap: 10,
   },
 });

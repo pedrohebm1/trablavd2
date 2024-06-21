@@ -37,7 +37,7 @@ export default function ReceiptDetails({
               data.codTax,
               data.state,
               parseFloat(data.receiptValue)
-            )}
+            ).toFixed(2)}
           </Text>
         </View>
         <View style={styles.Options}>

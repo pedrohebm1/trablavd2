@@ -9,42 +9,18 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-
-const acceptableCodes = ["1234", "6789", "1708", "5952"];
-const acceptableStates = ["RJ", "SP", "MG"];
-const acceptableSuppliers = ["totvs", "microsoft"];
+import { validateReceipt } from "../utils/receiptValidation/receiptValidation";
 
 export default function Cadastro() {
-  const [receipt, setReceipt] = useState("");
+  const [receipt, setReceipt] = useState<string>("");
   const [codTax, setCodTax] = useState("");
   const [receiptValue, setReceiptValue] = useState("");
   const [state, setState] = useState("");
   const [supplier, setSupplier] = useState("");
 
   async function handleNewReceipt() {
-    if (
-      receipt.trim() == "" ||
-      codTax.trim() == "" ||
-      receiptValue.trim() == "" ||
-      state.trim() == "" ||
-      supplier.trim() == ""
-    )
-      return Alert.alert("Campo(s) inválido(s)", "Favor preencher o(s) campo(s)");
-      console.log("u")
-    if (!acceptableCodes.includes(codTax.trim().toLowerCase()))
-      return Alert.alert("Código inválido", "Favor inserir um código válido");
-    console.log("i")
-    if (!acceptableStates.includes(state.trim().toUpperCase()))
-      return Alert.alert("Estado inválido", "Favor inserir um estado válido");
-    console.log("e")
-    if (!acceptableSuppliers.includes(supplier.trim().toLowerCase()))
-      return Alert.alert(
-        "Fornecedor inválido",
-        "Favor inserir um fornecedor válido"
-      );
-
-      console.warn("a")
-
+    
+   if (validateReceipt({receipt, codTax, receiptValue, state, supplier})) { 
     const data = {
       id: String(new Date().getTime()),
       receipt,
@@ -54,7 +30,7 @@ export default function Cadastro() {
       supplier,
     };
 
-    await saveReceipt(data);
+    await saveReceipt(data);}
   }
 
   return (
@@ -80,6 +56,7 @@ export default function Cadastro() {
         <TextInput
           style={styles.Input}
           placeholder="Valor da nota fiscal"
+          keyboardType="numeric"
           value={receiptValue}
           onChangeText={(value) => setReceiptValue(value)}
         ></TextInput>
@@ -93,6 +70,8 @@ export default function Cadastro() {
         <TextInput
           style={styles.Input}
           placeholder="Fornecedor"
+          autoCapitalize="none"
+          maxLength={40}
           value={supplier}
           onChangeText={(value) => setSupplier(value)}
         ></TextInput>
