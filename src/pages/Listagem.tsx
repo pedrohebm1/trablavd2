@@ -4,6 +4,7 @@ import { loadReceipt, removeReceipt } from "../utils/storageUtil";
 import Receipt from "../components/Receipts/Receipts";
 import ReceiptDetails from "../components/ReceiptDetails/ReceiptDetails";
 import { useFocusEffect } from "@react-navigation/native";
+import calculateTax from "../utils/calculateTax";
 
 type Props = {
   id: string;
@@ -75,7 +76,7 @@ export default function Listagem() {
                     receipt.supplier.toLowerCase() === "totvs"
                 )
                 .reduce(
-                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  (acc, receipt) => (acc += (parseFloat(receipt.receiptValue)+calculateTax(receipt.codTax, receipt.state, parseFloat(receipt.receiptValue)))),
                   0
                 ).toFixed(2)}
             </Text>
@@ -99,7 +100,7 @@ export default function Listagem() {
                     receipt.supplier.toLowerCase() === "totvs"
                 )
                 .reduce(
-                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  (acc, receipt) => (acc += (parseFloat(receipt.receiptValue)+calculateTax(receipt.codTax, receipt.state, parseFloat(receipt.receiptValue)))),
                   0
                 ).toFixed(2)}
             </Text>
@@ -123,7 +124,7 @@ export default function Listagem() {
                     receipt.supplier.toLowerCase() === "totvs"
                 )
                 .reduce(
-                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  (acc, receipt) => (acc += (parseFloat(receipt.receiptValue)+calculateTax(receipt.codTax, receipt.state, parseFloat(receipt.receiptValue)))),
                   0
                 ).toFixed(2)}
             </Text>
@@ -150,7 +151,7 @@ export default function Listagem() {
                     receipt.supplier.toLowerCase() === "microsoft"
                 )
                 .reduce(
-                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  (acc, receipt) => (acc += (parseFloat(receipt.receiptValue)+calculateTax(receipt.codTax, receipt.state, parseFloat(receipt.receiptValue)))),
                   0
                 ).toFixed(2)}
             </Text>
@@ -174,7 +175,7 @@ export default function Listagem() {
                     receipt.supplier.toLowerCase() === "microsoft"
                 )
                 .reduce(
-                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  (acc, receipt) => (acc += (parseFloat(receipt.receiptValue)+calculateTax(receipt.codTax, receipt.state, parseFloat(receipt.receiptValue)))),
                   0
                 ).toFixed(2)}
             </Text>
@@ -198,7 +199,7 @@ export default function Listagem() {
                     receipt.supplier.toLowerCase() === "microsoft"
                 )
                 .reduce(
-                  (acc, receipt) => (acc += parseFloat(receipt.receiptValue)),
+                  (acc, receipt) => (acc += (parseFloat(receipt.receiptValue)+calculateTax(receipt.codTax, receipt.state, parseFloat(receipt.receiptValue)))),
                   0
                 ).toFixed(2)}
             </Text>

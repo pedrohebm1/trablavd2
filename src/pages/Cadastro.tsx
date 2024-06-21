@@ -18,6 +18,10 @@ export default function Cadastro() {
   const [state, setState] = useState("");
   const [supplier, setSupplier] = useState("");
 
+  function caseFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
   async function handleNewReceipt() {
     
    if (validateReceipt({receipt, codTax, receiptValue, state, supplier})) { 
@@ -79,7 +83,7 @@ export default function Cadastro() {
           autoCapitalize="none"
           maxLength={40}
           value={supplier}
-          onChangeText={(value) => setSupplier(value.toLowerCase())}
+          onChangeText={(value) => setSupplier(caseFirstLetter(value.toLowerCase()))}
         ></TextInput>
       </View>
       <TouchableOpacity
